@@ -21,7 +21,7 @@ public class Editor {
         try {
             checkExistsDepartment(temp);
             changeEmployee(temp.getDirector(),"отдел",emptyId);
-            FileOutputStream outputStream = new FileOutputStream("C:\\Users\\Рафаэль\\Desktop\\1_"+emptyId);
+            FileOutputStream outputStream = new FileOutputStream("C:\\1_"+emptyId);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(temp);
             objectOutputStream.close();
@@ -37,9 +37,9 @@ public class Editor {
         }
     }
     private static Employee findEmployee(String id) throws IOException, ClassNotFoundException {
-     if(new File("C:\\Users\\Рафаэль\\Desktop\\0_"+id).exists())
+     if(new File("C:\\0_"+id).exists())
     {
-        FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Рафаэль\\Desktop\\"+"0_"+id);
+        FileInputStream fileInputStream = new FileInputStream("C:\\"+"0_"+id);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
         Employee read = (Employee) objectInputStream.readObject();
         fileInputStream.close();
@@ -50,7 +50,7 @@ public class Editor {
         return null;
 }
     private static void checkExistsDepartment(Department temp) throws IOException, duplicateDirector, ClassNotFoundException, duplicateObject {
-        File file = new File("C:\\Users\\Рафаэль\\Desktop\\");
+        File file = new File("C:\\");
         String[] test = file.list();
         ArrayList<String[]> stro4ki = new ArrayList<String[]>();
         for (int i = 0; i < test.length; i++)
@@ -62,7 +62,7 @@ public class Editor {
                 res.add(stro4ki.get(i));
         }
         for(int i=0;i<res.size();i++) {
-            FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Рафаэль\\Desktop\\" + res.get(i)[0] + "_" + res.get(i)[1]);
+            FileInputStream fileInputStream = new FileInputStream("C:\\" + res.get(i)[0] + "_" + res.get(i)[1]);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             Department read = (Department) objectInputStream.readObject();
             if (read.getName().equals(temp.getName())) {
@@ -73,7 +73,7 @@ public class Editor {
         }
     }
     private static String emptyId(String k) {
-        File file = new File("C:\\Users\\Рафаэль\\Desktop\\");
+        File file = new File("C:\\");
         String[] test = file.list();
         ArrayList<String[]> stro4ki = new ArrayList<String[]>();
         for (int i = 0; i < test.length; i++)
@@ -112,7 +112,7 @@ public class Editor {
         temp.setSalary(Integer.parseInt(salary));
         try {
             checkExistsEmployee(temp);
-            FileOutputStream outputStream = new FileOutputStream("C:\\Users\\Рафаэль\\Desktop\\0_"+emptyId("0"));
+            FileOutputStream outputStream = new FileOutputStream("C:\\0_"+emptyId("0"));
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(temp);
             objectOutputStream.close();
@@ -124,7 +124,7 @@ public class Editor {
         catch(ClassNotFoundException ex){}
     }
     private static void checkExistsEmployee(Employee temp) throws duplicateObject, IOException, ClassNotFoundException {
-        File file = new File("C:\\Users\\Рафаэль\\Desktop\\");
+        File file = new File("C:\\");
         String[] test = file.list();
         ArrayList<String[]> stro4ki = new ArrayList<String[]>();
         for (int i = 0; i < test.length; i++)
@@ -137,7 +137,7 @@ public class Editor {
         }
         for(int i=0;i<res.size();i++)
         {
-            FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Рафаэль\\Desktop\\"+res.get(i)[0]+"_"+res.get(i)[1]);
+            FileInputStream fileInputStream = new FileInputStream("C:\\"+res.get(i)[0]+"_"+res.get(i)[1]);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             Employee read = (Employee) objectInputStream.readObject();
             if(read.equals(temp)) throw new duplicateObject();
@@ -148,28 +148,22 @@ public class Editor {
     private static void reportEmployee(Employee ob) {
 
         String kek =
-                "Сотрудник: "+
-                        ob.getLastName()+" " +
-                        ob.getFirstName()+" " +
-                        ob.getMiddleName()+" " +"\n"+
+                "Сотрудник: " +
+                        ob.getLastName() + " " +
+                        ob.getFirstName() + " " +
+                        ob.getMiddleName() + " " + "\n" +
                         "Отдел № " +
-                        ob.getOtdel()+ "\n"+
+                        ob.getOtdel() + "\n" +
                         "Телефон: " +
-                        ob.getPhone()+
-                        "\nРазмер зарплаты: "+
+                        ob.getPhone() +
+                        "\nРазмер зарплаты: " +
                         ob.getSalary();
         View.sent(kek);
     }
-    public static void  readEmployee() throws IOException, ClassNotFoundException {
-        FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Рафаэль\\Desktop\\0_000");
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        Employee read = (Employee) objectInputStream.readObject();
-        reportEmployee(read);
-    }
     public static void showEmployee(String id) throws IOException, ClassNotFoundException {
-        if(new File("C:\\Users\\Рафаэль\\Desktop\\0_"+id).exists())
+        if(new File("C:\\0_"+id).exists())
         {
-            FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Рафаэль\\Desktop\\"+"0_"+id);
+            FileInputStream fileInputStream = new FileInputStream("C:\\"+"0_"+id);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             Employee read = (Employee) objectInputStream.readObject();
             report("ID сотрудника:"+ id);
@@ -181,7 +175,7 @@ public class Editor {
             report("Сотрудник с указанным ID не существует");
     }
     public static void showEmployees() throws IOException, ClassNotFoundException {
-        File file = new File("C:\\Users\\Рафаэль\\Desktop\\");
+        File file = new File("C:\\");
         String[] test = file.list();
         ArrayList<String[]> stro4ki = new ArrayList<String[]>();
         for (int i = 0; i < test.length; i++)
@@ -195,7 +189,7 @@ public class Editor {
         boolean flag = false;
         for(int i=0;i<res.size();i++)
         {
-                FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Рафаэль\\Desktop\\"+res.get(i)[0]+"_"+res.get(i)[1]);
+                FileInputStream fileInputStream = new FileInputStream("C:\\"+res.get(i)[0]+"_"+res.get(i)[1]);
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
                 Employee read = (Employee) objectInputStream.readObject();
                 report("ID сотрудника:"+ res.get(i)[1]);
@@ -207,9 +201,9 @@ public class Editor {
         if(!flag) report("Ни одного сотрудника не обнаружено");
     }
     public static void showDepartment(String id) throws IOException, ClassNotFoundException {
-        if(new File("C:\\Users\\Рафаэль\\Desktop\\1_"+id).exists())
+        if(new File("C:\\1_"+id).exists())
         {
-        FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Рафаэль\\Desktop\\"+"1_"+id);
+        FileInputStream fileInputStream = new FileInputStream("C:\\"+"1_"+id);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
         Department read = (Department) objectInputStream.readObject();
         report("ID отдела:"+ id);
@@ -221,7 +215,7 @@ public class Editor {
             report("Отдел с указанным ID не существует");
     }
     public static void showDepartments() throws IOException, ClassNotFoundException {
-        File file = new File("C:\\Users\\Рафаэль\\Desktop\\");
+        File file = new File("C:\\");
         String[] test = file.list();
         ArrayList<String[]> stro4ki = new ArrayList<String[]>();
         for (int i = 0; i < test.length; i++)
@@ -235,7 +229,7 @@ public class Editor {
         boolean flag = false;
         for(int i=0;i<res.size();i++)
         {
-            FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Рафаэль\\Desktop\\"+res.get(i)[0]+"_"+res.get(i)[1]);
+            FileInputStream fileInputStream = new FileInputStream("C:\\"+res.get(i)[0]+"_"+res.get(i)[1]);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             Department read = (Department) objectInputStream.readObject();
             report("ID отдела:"+ res.get(i)[1]);
@@ -258,7 +252,7 @@ public class Editor {
     }
     public static void searchDepartament(String attr,String value) throws IOException, ClassNotFoundException {
         boolean flag = false;
-        File file = new File("C:\\Users\\Рафаэль\\Desktop\\");
+        File file = new File("C:\\");
         String[] test = file.list();
         ArrayList<String[]> stro4ki = new ArrayList<String[]>();
         for (int i = 0; i < test.length; i++)
@@ -271,7 +265,7 @@ public class Editor {
         }
         for(int i=0;i<res.size();i++)
         {
-            FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Рафаэль\\Desktop\\"+res.get(i)[0]+"_"+res.get(i)[1]);
+            FileInputStream fileInputStream = new FileInputStream("C:\\"+res.get(i)[0]+"_"+res.get(i)[1]);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             Department read = (Department) objectInputStream.readObject();
                 switch (attr)
@@ -308,13 +302,13 @@ public class Editor {
         }
     public static void deleteDepartment(String id) throws IOException, ClassNotFoundException {
 
-        FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Рафаэль\\Desktop\\"+"1_"+id);
+        FileInputStream fileInputStream = new FileInputStream("C:\\"+"1_"+id);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
         Department read = (Department) objectInputStream.readObject();
         fileInputStream.close();
         objectInputStream.close();
-        File file = new File("C:\\Users\\Рафаэль\\Desktop\\1_"+id);
-        if(file.delete()) {
+        File file = new File("C:\\1_"+id);
+            if(file.delete()) {
             report("ID отдела:" + id);
             reportDeparment(read);
             report("Успешно удалён");
@@ -324,12 +318,12 @@ public class Editor {
         }
     }
     public static void deleteEmployee(String id) throws IOException, ClassNotFoundException {
-        FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Рафаэль\\Desktop\\"+"0_"+id);
+        FileInputStream fileInputStream = new FileInputStream("C:\\"+"0_"+id);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
         Employee read = (Employee) objectInputStream.readObject();
         fileInputStream.close();
         objectInputStream.close();
-        File file = new File("C:\\Users\\Рафаэль\\Desktop\\0_"+id);
+        File file = new File("C:\\0_"+id);
         if(file.delete()) {
             report("ID сотрудника:" + id);
             reportEmployee(read);
@@ -341,7 +335,7 @@ public class Editor {
     }
     public static void searchEmployee(String attr,String value) throws IOException, ClassNotFoundException {
                 boolean flag = false;
-                File file = new File("C:\\Users\\Рафаэль\\Desktop\\");
+                File file = new File("C:\\");
                 String[] test = file.list();
                 ArrayList<String[]> stro4ki = new ArrayList<String[]>();
                 for (int i = 0; i < test.length; i++)
@@ -354,7 +348,7 @@ public class Editor {
                 }
                 for(int i=0;i<res.size();i++)
                 {
-                    FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Рафаэль\\Desktop\\"+res.get(i)[0]+"_"+res.get(i)[1]);
+                    FileInputStream fileInputStream = new FileInputStream("C:\\"+res.get(i)[0]+"_"+res.get(i)[1]);
                     ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
                     Employee read = (Employee) objectInputStream.readObject();
                     switch (attr)
@@ -431,7 +425,7 @@ public class Editor {
                 if(!flag) report("Сотрудников с указанным значением атрибута \""+attr+"\" = "+value+" не существует");
     }
     public static void changeDepartment(String id, String attr,String value) throws IOException, ClassNotFoundException {
-                FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Рафаэль\\Desktop\\"+"1_"+id);
+                FileInputStream fileInputStream = new FileInputStream("C:\\"+"1_"+id);
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
                 Department read = (Department) objectInputStream.readObject();
                 fileInputStream.close();
@@ -446,13 +440,13 @@ public class Editor {
                         break;
                     }
                 }
-                FileOutputStream outputStream = new FileOutputStream("C:\\Users\\Рафаэль\\Desktop\\1_"+id);
+                FileOutputStream outputStream = new FileOutputStream("C:\\1_"+id);
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
                 objectOutputStream.writeObject(read);
                 objectOutputStream.close();
     }
     public static void changeEmployee(String id,String attr,String value) throws IOException, ClassNotFoundException {
-        FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Рафаэль\\Desktop\\"+"0_"+id);
+        FileInputStream fileInputStream = new FileInputStream("C:\\"+"0_"+id);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
         Employee read = (Employee) objectInputStream.readObject();
         fileInputStream.close();
@@ -487,7 +481,7 @@ public class Editor {
                 break;
             }
         }
-        FileOutputStream outputStream = new FileOutputStream("C:\\Users\\Рафаэль\\Desktop\\0_"+id);
+        FileOutputStream outputStream = new FileOutputStream("C:\\0_"+id);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
         objectOutputStream.writeObject(read);
         objectOutputStream.close();
